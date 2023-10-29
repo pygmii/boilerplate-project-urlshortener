@@ -9,6 +9,9 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 
+// for parsing application/json
+app.use(bodyParser.json()); 
+
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function(req, res) {
@@ -21,17 +24,9 @@ app.get('/api/hello', function(req, res) {
 });
 
 // Developed function
-app.post('/api/shorturl', async function(req, res) {
+app.post('/api/shorturl', function(req, res) {
   // Read or create db.json
-  const db = await JSONPreset('db.json', { posts: [] })
-
-  // Edit db.json content using plain JavaScript
-  db.data
-    .posts
-    .push({ id: 1, title: 'lowdb is awesome' })
-
-  // Save to file
-  db.write()
+  console.log(req.body);
 });
 
 app.listen(port, function() {
