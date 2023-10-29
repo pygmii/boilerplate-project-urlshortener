@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const { LowSync } = require('lowdb/lib');
 const app = express();
 
 // Basic Configuration
@@ -20,8 +21,17 @@ app.get('/api/hello', function(req, res) {
 });
 
 // Developed function
-app.get('/api/test', function(req, res) {
+app.get('/api/test', async function(req, res) {
+  // Read or create db.json
+  const db = await JSONPreset('db.json', { posts: [] })
 
+  // Edit db.json content using plain JavaScript
+  db.data
+    .posts
+    .push({ id: 1, title: 'lowdb is awesome' })
+
+  // Save to file
+  db.write()
 });
 
 app.listen(port, function() {
