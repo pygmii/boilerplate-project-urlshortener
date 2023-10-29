@@ -1,7 +1,8 @@
 require('dotenv').config();
+require('lowdb/node');
+
 const express = require('express');
 const cors = require('cors');
-const { LowSync } = require('lowdb/lib');
 const app = express();
 
 // Basic Configuration
