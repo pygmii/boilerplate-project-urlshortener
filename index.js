@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('lowdb/lib');
 require('lowdb/node');
 
 const express = require('express');
