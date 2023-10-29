@@ -13,6 +13,10 @@ app.use(cors());
 // for parsing application/json
 app.use(bodyParser.json()); 
 
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+//form-urlencoded
+
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function(req, res) {
