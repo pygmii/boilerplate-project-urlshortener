@@ -1,6 +1,4 @@
 require('dotenv').config();
-require('lowdb/lib');
-require('lowdb/node');
 
 const express = require('express');
 const cors = require('cors');
@@ -23,7 +21,7 @@ app.get('/api/hello', function(req, res) {
 });
 
 // Developed function
-app.get('/api/test', async function(req, res) {
+app.post('/api/shorturl', async function(req, res) {
   // Read or create db.json
   const db = await JSONPreset('db.json', { posts: [] })
 
