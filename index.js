@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -32,6 +33,21 @@ app.get('/api/hello', function(req, res) {
 app.post('/api/shorturl', function(req, res) {
   // Read or create db.json
   console.log(req.body);
+
+  let connection = mysql.createConnection({
+    host: '119.59.102.102',
+    user: 'urlshortener',
+    password: 'c1Yes4',
+    database: 'urlshortener'
+  });
+
+  connection.query(
+    'INSERT INTO `urlshortener`(`originalurl` `shorturl`) VALUES ("google.com", "1",)',
+    //[req.body.fname, req.body.lname, req.body.username, req.body.password, req.body.avatar],
+    function(err, results) {
+      res.json(results);
+    }
+  );
 });
 
 app.listen(port, function() {
