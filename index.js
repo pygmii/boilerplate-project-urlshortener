@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
+const validator = require('validator');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -34,9 +35,7 @@ app.post('/api/shorturl', function(req, res) {
   // Read or create db.json
   console.log(req.body);
 
-  try {
-    new URL(req.body.url);
-  } catch (err) {
+  if(!validator.isURL(req.body.url)) {
     res.json({ error: 'invalid url' });
     return;
   }
