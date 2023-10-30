@@ -61,6 +61,39 @@ app.post('/api/shorturl', function(req, res) {
   res.json({original_url: req.body.url, short_url: shortUrl});
 });
 
+// Developed function
+app.get('/api/shorturl/:id', function(req, res) {
+  let shortenUrl = req.params.id;
+
+  console.log(shortenUrl);
+
+  let connection = mysql.createConnection({
+    host: '119.59.102.102',
+    user: 'urlshortener',
+    password: 'c1Yes4',
+    database: 'urlshortener'
+  });
+
+  let url = "";
+
+  connection.query(
+    'SELECT originalurl FROM urlshortener WHERE id=?',
+    [shortenUrl],
+    function(err, results) {
+      if(err)
+      {
+        console.error(err.message);
+        throw err;
+      }
+
+      url = results[0];
+      console.log("selected record: " + url);
+    }
+  );
+
+  res.redirect(url);
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
