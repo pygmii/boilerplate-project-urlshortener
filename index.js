@@ -42,10 +42,15 @@ app.post('/api/shorturl', function(req, res) {
   });
 
   connection.query(
-    'INSERT INTO urlshortener(originalurl, shorturl) VALUES ("google.com", "1")',
-    //[req.body.fname, req.body.lname, req.body.username, req.body.password, req.body.avatar],
+    'INSERT INTO urlshortener(originalurl) VALUES ("?)',
+    [req.body.url],
     function(err, results) {
-      console.log(err);
+      if(err)
+      {
+        console.error(err.message);
+        throw err;
+      }
+      console.log("1 record inserted, ID: " + results.insertId);
     }
   );
 });
