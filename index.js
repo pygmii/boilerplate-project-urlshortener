@@ -42,7 +42,7 @@ app.post('/api/shorturl', function(req, res) {
   });
 
   connection.query(
-    'INSERT INTO urlshortener(originalurl) VALUES ("?)',
+    'INSERT INTO urlshortener(originalurl) VALUES ("?")',
     [req.body.url],
     function(err, results) {
       if(err)
