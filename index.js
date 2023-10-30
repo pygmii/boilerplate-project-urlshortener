@@ -34,6 +34,13 @@ app.post('/api/shorturl', function(req, res) {
   // Read or create db.json
   console.log(req.body);
 
+  try {
+    new URL(req.body.url);
+  } catch (err) {
+    res.json({ error: 'invalid url' });
+    return;
+  }
+
   let connection = mysql.createConnection({
     host: '119.59.102.102',
     user: 'urlshortener',
