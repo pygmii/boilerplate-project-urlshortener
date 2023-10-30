@@ -86,7 +86,7 @@ app.get('/api/shorturl/:id', function(req, res) {
         throw err;
       }
 
-      url = results[0];
+      url = results[0].originalurl;
       console.log("selected record: " + url);
     }
   );
