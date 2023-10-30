@@ -44,7 +44,7 @@ app.post('/api/shorturl', function(req, res) {
   let shortUrl = null;
 
   connection.query(
-    'INSERT INTO urlshortener(originalurl) VALUES ("?")',
+    'INSERT INTO urlshortener(originalurl) VALUES (?)',
     [req.body.url],
     function(err, results) {
       if(err)
@@ -88,10 +88,10 @@ app.get('/api/shorturl/:id', function(req, res) {
 
       url = results[0].originalurl;
       console.log("selected record: " + url);
+      
+      res.redirect(301,url);
     }
   );
-
-  res.redirect(url);
 });
 
 app.listen(port, function() {
