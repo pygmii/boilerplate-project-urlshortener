@@ -41,7 +41,7 @@ app.post('/api/shorturl', function(req, res) {
   }
 
   let connection = mysql.createConnection({
-    host: '119.59.102.102',
+    host: '119.59.102.000',
     user: 'urlshortener',
     password: 'c1Yes4',
     database: 'urlshortener'
