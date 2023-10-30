@@ -41,8 +41,6 @@ app.post('/api/shorturl', function(req, res) {
     database: 'urlshortener'
   });
 
-  let shortUrl = null;
-
   connection.query(
     'INSERT INTO urlshortener(originalurl) VALUES (?)',
     [req.body.url],
@@ -53,12 +51,13 @@ app.post('/api/shorturl', function(req, res) {
         throw err;
       }
 
-      shortUrl = results.insertId;
-      console.log("1 record inserted, ID: " + results.insertId);
+      
+      let shortUrl = results.insertId;
+      console.log("1 record inserted, ID: " + shortUrl);
+      
+      res.json({original_url: req.body.url, short_url: results.insertId});
     }
   );
-
-  res.json({original_url: req.body.url, short_url: shortUrl});
 });
 
 // Developed function
